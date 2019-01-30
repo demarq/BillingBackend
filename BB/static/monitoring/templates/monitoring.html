@@ -1,0 +1,86 @@
+<div class="md-whiteframe-3dp" layout="column">
+    <div>
+        <md-toolbar>
+            <span class="md-toolbar-tools">Знайти світч</span>
+        </md-toolbar>
+        <div layout="row" class="mainWrapper">
+            <md-input-container>
+                <label>ІР адреса</label>
+                <input aria-label="awdas" ng-model="IpFilter">
+            </md-input-container>
+            <md-input-container>
+                <label>MAC адреса</label>
+                <input aria-label="awdas">
+            </md-input-container>
+            <md-input-container>
+                <md-button class="md-raised md-primary">
+                    Знайти
+                </md-button>
+            </md-input-container>
+        </div>
+    </div>
+
+    <div class="mainWrapper">
+        <md-list>
+            <md-list-item  ng-repeat="sw in switches | filter: IpFilter" flex layout="row" ng-click="selectSw(sw)">
+                <span flex="20">{[ sw.name ]}</span>
+                <span flex="20">{[ sw.software_version ]}</span>
+                <span flex="20">{[ sw.ip ]}</span>
+                <span flex="20">{[ sw.mac ]}</span>
+                <span flex="20">{[ sw.uptime ]}</span>
+                <md-divider></md-divider>
+            </md-list-item>
+        </md-list>
+    </div>
+
+</div>
+
+<md-content class="md-whiteframe-3dp portWrapper" ng-show="selectedSw" layout="column">
+    <md-list layout="column" flex>
+        <md-list-item class="background-light-grey" flex>
+            <span  flex="20" flex-offset="5">
+                Номер
+            </span>
+                <span flex="20">
+                Список МАС
+            </span>
+                <span flex="20">
+                Список VLAN
+            </span>
+                <span flex="20">
+                Помилки
+            </span>
+                <span flex="20">
+                Статус
+            </span>
+        </md-list-item>
+        <md-list-item ng-repeat="port in selectedSw.ports">
+            <span flex="20" flex-offset="5">
+                {[ port.number ]}
+            </span>
+            <span flex="20" layout="column">
+                <span ng-repeat="mac in port.mac_list">
+                    {[ mac ]}
+                </span>
+            </span>
+
+            <span flex="20">
+                <span ng-repeat="(vlan, type) in port.vlans" flex layout="row">
+                    <span flex="30">{[ vlan ]}:</span>
+                    <span flex="30">{[ type ]}</span>
+                </span>
+            </span>
+
+            <span flex="20">
+                <span ng-class="port.errors > 4000 ? null  : color_offline">
+                    {[ port.errors ]}
+                </span>
+            </span>
+                <span flex="20">
+                    <span ng-show="port.link" class="color_good">up</span>
+                    <span ng-show="!port.link" class="color_offline">down</span>
+                </span>
+            <md-divider></md-divider>
+        </md-list-item>
+    </md-list>
+</md-content>

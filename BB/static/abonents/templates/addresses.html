@@ -1,0 +1,63 @@
+<div layout="row" layout-align="center start" flex>
+        <div class="md-whiteframe-7dp" flex="50">
+            <md-toolbar>
+                <span class="md-toolbar-tools">
+                    Додані вулиці
+                </span>
+            </md-toolbar>
+            <div layout="column">
+                <md-list flex>
+                    <md-list-item ng-repeat="(index, address) in addresses" flex layout="row" ng-click="null">
+                        <span flex="70">{[ address ]}</span>
+                        <span flex layout="row">
+                            <md-button class="fab md-icon-button" ng-click="addresses.splice(index, 1);">
+                                <i class="material-icons">
+                                    close
+                                </i>
+                            </md-button>
+                            <md-button class="fab md-icon-button">
+                                <i class="material-icons">
+                                    create
+                                </i>
+                            </md-button>
+                        </span>
+                    </md-list-item>
+                </md-list>
+            </div>
+        </div>
+
+        <div class="md-whiteframe-7dp" flex="40" flex-offset="5">
+            <md-toolbar>
+                <span class="md-toolbar-tools">
+                    Додати вулицю
+                </span>
+            </md-toolbar>
+            <span layout="row">
+                <div layout="row" flex>
+                    <md-input-container flex-offset="10">
+                        <label>Тип вулиці</label>
+                        <md-select ng-model="selectedStreetType">
+                            <md-option ng-value="streetType" ng-repeat="streetType in streetTypes">
+                                {[ streetType ]}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                    <md-input-container flex-offset="3">
+                        <label>Назва</label>
+                        <input ng-model="streetName">
+                    </md-input-container>
+                    <md-input-container flex-offset="3">
+                        <label>Номер</label>
+                        <input ng-model="streetNumber">
+                    </md-input-container>
+
+                </div>
+                <md-input-container>
+                    <md-button class="md-raised md-primary" ng-click="addresses.push(selectedStreetType + ' ' + streetName + ' ' + streetNumber)">
+                        Створити
+                    </md-button>
+                </md-input-container>
+            </span>
+        </div>
+
+</div>

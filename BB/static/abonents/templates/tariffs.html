@@ -1,0 +1,62 @@
+<div layout="row" flex>
+    <div class="md-whiteframe-7dp" flex>
+        <md-toolbar>
+            <span class="md-toolbar-tools">Тарифи</span>
+        </md-toolbar>
+        <md-list layout="column" flex>
+            <md-list-item ng-repeat="(index, tariff) in tariffs" ng-click="selectedTariff = tariff">
+                <div flex="90" layout="row">
+                    <span flex="50">
+                        <b>{[ tariff.name ]}</b>
+                    </span>
+                    <span flex="30">
+                        {[ tariff.speed ]}
+                    </span>
+                    <span flex="30">
+                        {[ tariff.payment ]}
+                    </span>
+                </div>
+                <div flex="30" layout="row">
+                    <md-button class="md-icon-button fab" ng-click="tariffs.splice(index, 1)">
+                        <i class="material-icons">
+                            close
+                        </i>
+                    </md-button>
+                    <md-button class="md-icon-button fab">
+                        <i class="material-icons">
+                            create
+                        </i>
+                    </md-button>
+                </div>
+            </md-list-item>
+        </md-list>
+    </div>
+    <div class="md-whiteframe-3dp" flex flex-offset="10">
+        <md-toolbar>
+            <span class="md-toolbar-tools">Додати тариф</span>
+        </md-toolbar>
+        <div layout="row" class='mainWrapper' flex>
+            <md-input-container>
+                <label>Назва</label>
+                <input ng-model="tariffToAdd.name">
+            </md-input-container>
+            <md-input-container>
+                <label>Вартість в місяць</label>
+                <input ng-model="tariffToAdd.payment">
+            </md-input-container>
+            <md-input-container>
+                <label>Швидкість</label>
+                <input ng-model="tariffToAdd.speed">
+            </md-input-container>
+            <md-input-container>
+                <label>Опис</label>
+                <input ng-model="tariffToAdd.description">
+            </md-input-container>
+            <md-input-container>
+                <md-button class="md-raised md-primary" ng-click="tariffs.push(tariffToAdd)">
+                    Додати
+                </md-button>
+            </md-input-container>
+        </div>
+    </div>
+</div>

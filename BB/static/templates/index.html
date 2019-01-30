@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="billingApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Billing</title>
+    {% load static from staticfiles %}
+    <link rel="stylesheet" href="{% static 'lib/node_modules/angular-material/angular-material.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/all.css' %}">
+</head>
+
+<body class="backgroud-light-grey">
+<div ng-controller="indexController">
+    <md-toolbar layout='row' layout-align="start center" flex>
+        <span flex>
+            <md-button ng-click="toggleLeft()" class="md-icon-button md-raised md-primary">
+                <md-icon class="material-icons">
+                    menu
+                </md-icon>
+            </md-button>
+        </span>
+        <span  flex-offset="90" flex="10">
+            <md-button ng-click="toggleLeft()" class="md-icon-button md-raised md-primary">
+                <md-icon class="material-icons">
+                    account_circle
+                </md-icon>
+            </md-button>
+        </span>
+        <span  flex="10">
+            <md-button ng-click="toggleLeft()" class="md-icon-button md-raised md-primary">
+                <md-icon class="material-icons">
+                    exit_to_app
+                </md-icon>
+            </md-button>
+        </span>
+    </md-toolbar>
+    <md-sidenav class="md-sidenav-left" md-component-id="left"
+                md-whiteframe="7">
+        <md-toolbar>
+            <h1 class="md-toolbar-tools"> Tools </h1>
+        </md-toolbar>
+        <md-content class="sidenav__toolbarIcons">
+            <md-list>
+                <md-subheader>
+                    Абоненти
+                </md-subheader>
+                <md-list-item ui-sref="abonents" class="md-list-item-text" flex>
+                    <i class="material-icons"> how_to_reg </i>
+                    <span flex flex-offset="10">
+                            Абоненти
+                        </span>
+                </md-list-item>
+                <md-divider></md-divider>
+                <md-list-item ui-sref="abonentsAddNew" class="md-list-item-text" flex>
+                    <i class="material-icons">add</i>
+                    <span flex flex-offset="10">
+                            Додати абонента
+                        </span>
+                </md-list-item>
+                <md-list-item ui-sref="addresses" class="md-list-item-text" flex>
+                    <i class="material-icons" flex="10">business</i>
+                    <span flex flex-offset="10">
+                            Адреси
+                        </span>
+                </md-list-item>
+                <md-list-item ui-sref="tariffs" class="md-list-item-text" flex>
+                    <i class="material-icons" flex="10">equalizer</i>
+                    <span flex flex-offset="10">
+                            Тарифи
+                        </span>
+                </md-list-item>
+                <md-list-item ui-sref="report" class="md-list-item-text" flex>
+                    <i class="material-icons" flex="10">library_books</i>
+                    <span flex flex-offset="10">
+                            Звіт
+                        </span>
+                </md-list-item>
+                <md-divider></md-divider>
+
+                <md-subheader>
+                    Обладнання
+                </md-subheader>
+                <md-list-item ui-sref="monitoring">
+                    <i class="material-icons" flex="10">router</i>
+                    <span flex-offset="10">
+                            Моніторинг
+                        </span>
+                </md-list-item>
+                <md-divider></md-divider>
+                <md-list-item ui-sref="main">
+                    <i ui-sref="index" class="material-icons" flex="10">weekend</i>
+                    <span flex-offset="10">
+                            Налаштування
+                        </span>
+                </md-list-item>
+                <md-list-item ui-sref="storage">
+                    <i ui-sref="index" class="material-icons" flex="10">archive</i>
+                    <span flex-offset="10">
+                            Склад
+                        </span>
+                </md-list-item>
+                <md-divider></md-divider>
+            </md-list>
+        </md-content>
+    </md-sidenav>
+</div>
+
+<div class="mainWrapper">
+    <ui-view></ui-view>
+</div>
+
+
+<script src="{% static 'lib/node_modules/angular/angular.js' %}"></script>
+<script src="{% static 'lib/node_modules/angular-material/angular-material.js' %}"></script>
+<script src="{% static 'lib/node_modules/angular-material/angular-material-mocks.js' %}"></script>
+<script src="{% static 'lib/node_modules/angular-ui-router/release/angular-ui-router.js' %}"></script>
+<script src="{% static 'lib/node_modules/angular-animate/angular-animate.js' %}"></script>
+<script src="{% static 'lib/node_modules/angular-aria/angular-aria.js' %}"></script>
+<script src="{% static 'lib/node_modules/angular-messages/angular-messages.js' %}"></script>
+<script src="{% static 'lib/node_modules/angular-material/angular-material.js' %}"></script>
+<script src="{% static 'lib/node_modules/angular-resource/angular-resource.js' %}"></script>
+
+<script src="{% static 'lib/node_modules/angular-route/angular-route.js' %}"></script>
+{# loading angularjs app  #}
+<script src="{% static 'app.js' %}"></script>
+<script src="{% static 'controllers/mainController.js' %}"></script>
+<script src="{% static 'controllers/indexController.js' %}"></script>
+<script src="{% static 'controllers/abonentsControllers.js' %}"></script>
+<script src="{% static 'controllers/storageController.js' %}"></script>
+<script src="{% static 'controllers/monitoringController.js' %}"></script>
+
+
+
+<script src="{% static 'components/mainComponent.js' %}"></script>
+<script src="{% static 'components/indexComponent.js' %}"></script>
+<script src="{% static 'components/abonentsComponents.js' %}"></script>
+<script src="{% static 'components/storageComponents.js' %}"></script>
+<script src="{% static 'components/monitoringComponent.js' %}"></script>
+
+
+</body>
+</html>

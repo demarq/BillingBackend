@@ -1,0 +1,45 @@
+.sidenav__toolbarIcons {
+    padding: 4%;
+}
+
+.mainWrapper {
+    margin: 10px;
+    height: 100%;
+}
+
+.color_good {
+    color: yellowgreen;
+}
+.color_credit {
+    color: 	#DAA520;
+}
+.color_offline {
+    color: coral;
+}
+
+.backgroud-white {
+    background-color: white;
+}
+
+.backgroud-light-red{
+    background-color: #ffdbdb;
+}
+
+.portWrapper {
+    padding-top: 60px;
+}
+
+.backgroud-yellow_attention {
+    background-color: #f2ffa8;
+ }
+
+.backgroud-grey {
+    background-color: #cecece;
+}
+
+.background-light-grey {
+    background-color: #efefef;
+}
+.personal_row:hover {
+    background-color: #c7d0d8;
+}

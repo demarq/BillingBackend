@@ -1,0 +1,69 @@
+<div layout="row">
+    <div class="md-whiteframe-3dp" layout="column" flex>
+
+        <md-toolbar>
+            <span class="md-toolbar-tools">На складі</span>
+        </md-toolbar>
+        <md-list flex>
+            <md-list-item ng-repeat="(index, obj) in storageContent" ng-click="null" layout="row">
+                <span flex="20">
+                    {[ obj.name ]}
+                </span>
+                <span flex="20">
+                    {[ obj.count ]} {[ obj.units ]}
+                </span>
+                <span flex="20">
+                    <b>{[ obj.type ]}</b>
+                </span>
+                <span flex-offset="20" layout="row">
+                    <md-button class="md-icon-button fas">
+                        <i class="material-icons">
+                            create
+                        </i>
+                    </md-button>
+                    <md-button class="md-icon-button fas" ng-click="storageContent.splice(index,1)">
+                        <i class="material-icons">
+                            clear
+                        </i>
+                    </md-button>
+                </span>
+            </md-list-item>
+        </md-list>
+    </div>
+    <div class="md-whiteframe-3dp" layout="column" flex flex-offset="10">
+        <md-toolbar>
+            <span class="md-toolbar-tools">Додати на склад</span>
+        </md-toolbar>
+        <div layout="row">
+            <md-input-container>
+                <label>Тип об'екту</label>
+                <md-select ng-model="newStorageObject.type">
+                    <md-option ng-repeat="object in objectTypes" ng-value="object">
+                        {[ object ]}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container>
+                <label>Назва</label>
+                <input aria-label="asdad" ng-model="newStorageObject.name">
+            </md-input-container>
+            <md-input-container>
+                <label>Кількість</label>
+                <input aria-label="asdad" ng-model="newStorageObject.count">
+            </md-input-container>
+            <md-input-container>
+                <label>Одиниці виміру</label>
+                <md-select ng-model="newStorageObject.units">
+                    <md-option ng-repeat="unit in objectUnits" ng-value="unit">
+                        {[ unit ]}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container>
+                <md-button class="md-raised md-primary" ng-click="storageContent.push(newStorageObject)"
+                >Зберегти
+                </md-button>
+            </md-input-container>
+        </div>
+    </div>
+</div>

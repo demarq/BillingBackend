@@ -1,0 +1,60 @@
+<div class="" layout="row" layout-align="center center" flex>
+    <div layout="column" class="md-whiteframe-3dp" layout-align="center center" flex="50">
+        <md-toolbar>
+            <span class="md-toolbar-tools">Додати абонента</span>
+        </md-toolbar>
+
+        <form method="post" layout="column" layout-align="start center">
+            <md-list>
+                <md-list-item layout="row" flex>
+                    <span flex="30">Прізвище:</span>
+                    <md-input-container>
+                        <input>
+                    </md-input-container>
+                </md-list-item>
+                <md-list-item layout="row" flex layout-align="start center">
+                    <span flex="30">Ім'я:</span>
+                    <md-input-container>
+                        <input>
+                    </md-input-container>
+                </md-list-item>
+                <md-list-item layout="row" flex>
+                    <span flex="30">По батькові:</span>
+                    <md-input-container>
+                        <input>
+                    </md-input-container>
+                </md-list-item>
+                <md-list-item>
+                    <span flex="30">Адреса:</span>
+                    <md-input-container flex>
+                        <md-select ng-model="saddress">
+                            <md-option ng-repeat="address in addresses" ng-value="address">
+                                {[ address ]}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </md-list-item>
+                <md-list-item flex layout="row">
+                    <span flex="30">ІР:</span>
+                    <md-input-container>
+                        <input>
+                    </md-input-container>
+                </md-list-item>
+                <md-list-item layout="row" flex>
+                    <span flex="30">МАС:</span>
+                    <md-input-container>
+                        <input>
+                    </md-input-container>
+                </md-list-item>
+                <md-list-item layout="row" flex>
+                    <span flex="30">Мережа:</span>
+                    <md-input-container>
+                        <input>
+                    </md-input-container>
+                </md-list-item>
+            </md-list>
+            <input flex="10" type="submit" class="md-button md-raised md-primary" value="Надіслати" aria-label="formsubmit">
+        </form>
+
+    </div>
+</div>

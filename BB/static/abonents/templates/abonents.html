@@ -1,0 +1,224 @@
+<md-content layout="column">
+
+    <div layout="column" class="md-whiteframe-3dp mainWrapper" flex layout-align="start center" ng-hide="selectedUser">
+        <span class="mainWrapper">
+            <i class="material-icons">
+                youtube_searched_for
+            </i>
+            Фільтрувати
+        </span>
+        <md-divider></md-divider>
+        <div layout="row">
+            <md-input-container>
+                <label>Номер договору</label>
+                <input class="md-input" ng-model="filters.name">
+            </md-input-container>
+            <md-input-container>
+                <label>Ім'я</label>
+                <input class="md-input" ng-model="filters.name">
+            </md-input-container>
+            <md-input-container>
+                <label>Прізвище</label>
+                <input class="md-input" ng-model="filters.secondName">
+            </md-input-container>
+            <md-input-container>
+                <label>По батькові</label>
+                <input class='md-input' ng-model="filters.thirdName">
+            </md-input-container>
+            <md-button aria-label="Шукати" class="md-raised md-primary" ng-click="">Шукати</md-button>
+        </div>
+    </div>
+
+    <div class="md-whiteframe-3dp mainWrapper" flex layout="column" ng-hide="selectedUser">
+        <div>
+            <md-list>
+                <md-list-item layout="row" flex style="background: #eaeaea">
+                    <span flex-offset="3" flex="10">Номер договору</span>
+                    <span flex-offset="10" flex="15">ПІБ</span>
+                    <span flex-offset="15" flex="10">Адреса</span>
+                    <span flex-offset="10" flex="5">ІР</span>
+                    <span flex-offset="15" flex="5">Стан</span>
+                </md-list-item>
+                <md-divider></md-divider>
+                <md-list-item ng-repeat="user in usersList" ng-click="getUser(user.id)">
+                    <div class="md-list-item-text" layout="row" flex>
+                         <span flex="10">
+                             {[ user.id ]}
+                         </span>
+                        <span flex="10">
+                            <span><b>{[ user.second_name ]}</b></span>
+                        </span>
+                        <span flex='10'>{[ user.first_name ]}</span>
+                        <span flex="10"> {[ user.third_name ]}</span>
+                        <span flex-offset="10" flex="20"> {[ user.address ]} </span>
+                        <span flex="20"> {[ user.ip ]} </span>
+                        <span flex>
+                            <i ng-show="user.state == 'online'" class="material-icons color_good"> network_check </i>
+                            <i ng-show="user.state == 'offline'"
+                               class="material-icons color_offline"> network_locked</i>
+                            <i ng-show="user.state == 'credit'" class="material-icons color_credit"> money_off </i>
+                         </span>
+                    </div>
+                    <md-divider></md-divider>
+                </md-list-item>
+            </md-list>
+        </div>
+    </div>
+    <div ng-show="selectedUser" layout="column">
+        <div layout="row" class="backgroud-grey" layout-align="center center" flex>
+            <md-button class="fab md-raised md-icon-button md-primary" ng-click="selectedUser = undefined">
+                <i class="material-icons"> reply </i>
+            </md-button>
+
+            <span class="md-toolbar-tools" layout-align="center center">Персональна Інформація</span>
+        </div>
+
+        <div layout="row">
+            <div layout="column" flex="50">
+                <div class="mainWrapper md-whiteframe-5dp">
+                    <md-toolbar layout="row" layout-align="center center">
+                        <span class="md-toolbar-tools">
+                            Користувач
+                        </span>
+                        <span flex="90" layout="row" layout-align="end center">
+                            <md-button class="md-icon-button" ng-hide="alterUser" ng-click="alterUser = selectedUser">
+                                <i class="material-icons">
+                                    create
+                                </i>
+                            </md-button>
+                            <md-button class="md-icon-button" ng-show="alterUser" ng-click="alterUser = undefined">
+                                <i class="material-icons">
+                                    clear
+                                </i>
+                            </md-button>
+                            <md-button class="md-icon-button" ng-show="alterUser" ng-click="saveUpdatedInfo(alterUser)">
+                                <i class="material-icons">
+                                    save
+                                </i>
+                            </md-button>
+                        </span>
+                    </md-toolbar>
+                    <md-divider></md-divider>
+                    <md-list layout="column">
+                        <md-list-item flex layout="row" class="personal_row">
+                            <span flex="40">
+                                ПІБ:
+                            </span>
+                            <span flex ng-hide="alterUser">
+                                {[ selectedUser.second_name ]} {[ selectedUser.first_name ]} {[ selectedUser.third_name ]}
+                            </span>
+                            <span flex ng-show="alterUser">
+                                <md-input-container>
+                                    <input aria-label="name" ng-model="alterUser.first_name" ng-value="alterUser.first_name">
+                                </md-input-container>
+                                <md-input-container>
+                                    <input aria-label="second_name" ng-model="alterUser.second_name" ng-value="alterUser.second_name">
+                                </md-input-container>
+                                <md-input-container>
+                                    <input aria-label="third_name" ng-model="alterUser.third_name" ng-value="alterUser.third_name">
+                                </md-input-container>
+                            </span>
+                        </md-list-item>
+                        <md-list-item flex layout="row" class="personal_row">
+                            <span flex="40">Номер договору: </span>
+                            <span ng-class="alterUser ? 'disabled' : null " flex> {[ selectedUser.id ]} </span>
+
+                        </md-list-item>
+                        <md-list-item flex layout="row" class="personal_row">
+                            <span flex="40">Адреса: </span>
+                            <span ng-hide="alterUser" flex> {[ selectedUser.address ]} </span>
+                            <md-input-container>
+                                <input aria-label="address" ng-show="alterUser" ng-value="alterUser.address" ng-model="alterUser.address">
+                            </md-input-container>
+                        </md-list-item>
+                        <md-list-item flex layout="row" class="personal_row">
+                            <span flex="40">Фінансовий стан:</span>
+                            <span ng-hide="alterUser" flex> {[ selectedUser.money ]} </span>
+                            <md-input-container>
+                                <input aria-label="money" ng-show="alterUser" ng-value="alterUser.money" ng-model="alterUser.money">
+                            </md-input-container>
+                        </md-list-item>
+                        <md-list-item flex layout="row" class="personal_row">
+                            <span flex="40">Коментар:</span>
+                            <span ng-hide="alterUser" flex> {[ selectedUser.comment ]} </span>
+                            <md-input-container>
+                                <textarea aria-label="comment" ng-show="alterUser" ng-value="alterUser.comment" ng-model="alterUser.comment"></textarea>
+                            </md-input-container>
+                        </md-list-item>
+                    </md-list>
+                </div>
+                <div class="mainWrapper md-whiteframe-5dp">
+
+                    <md-toolbar>
+                        <span class="md-toolbar-tools">
+                            Звернення
+                        </span>
+                    </md-toolbar>
+                    <div layout="column">
+                        <md-list ng-repeat="appeal in selectedUser.appeals_to_support" layout="column"
+                                 class="personal_row"
+                                 ng-class="{'backgroud-grey' : appeal.state == 'closed',
+                                            'backgroud-yellow_attention': appeal.state == 'open'}">
+
+                            <md-list-item layout="row" flex>
+                                <span flex="15">{[ appeal.date ]}</span>
+                                <span flex="30"><h4>{[ appeal.title ]}</h4></span>
+                                <span flex="40">{[ appeal.content ]}</span>
+                                <span flex>
+                                    {[ appeal.state ]}
+                                </span>
+                            </md-list-item>
+                        </md-list>
+                    </div>
+                </div>
+            </div>
+            <div layout="column" class="mainWrapper" flex>
+                <div layout="column" flex class="md-whiteframe-5dp ">
+                    <md-toolbar layout="row" layout-align="center center">
+                        <span class="md-toolbar-tools">Мережева інформація</span>
+                        <span flex="90" layout="row" layout-align="end center">
+                            <md-button class="md-icon-button ">
+                                <i class="material-icons">
+                                    create
+                                </i>
+                            </md-button>
+                        </span>
+                    </md-toolbar>
+                    <md-list layout="column">
+                        <md-list-item flex layout="row" class="personal_row"><span flex="40">ІР:</span> <span flex> {[ selectedUser.ip ]} </span>
+                        </md-list-item>
+                        <md-list-item flex layout="row" class="personal_row"><span flex="40">МАС:</span> <span flex> {[ selectedUser.mac ]} </span>
+                        </md-list-item>
+                        <md-list-item flex layout="row" class="personal_row"><span flex="40">Network:</span> <span flex> {[ selectedUser.network ]} </span>
+                        </md-list-item>
+                    </md-list>
+                </div>
+                <div layout="column" class="md-whiteframe-5dp" style="margin-top: 20px">
+                    <md-toolbar>
+                        <span class="md-toolbar-tools">
+                            Платежі
+                        </span>
+                    </md-toolbar>
+                    <md-list layout="column">
+                        <md-list-item class="personal_row"  flex ng-repeat="pay in payments" ng-class="pay.action === 'minus' ? 'backgroud-light-red' :   null">
+                            <span layout="row" flex>
+                                <span flex="30">
+                                    {[ pay.date ]}
+                                </span>
+                                <span flex="30">
+                                    {[ pay.content ]}
+                                </span>
+                                <span flex="30">
+                                    {[ pay.action ]}
+                                </span>
+                                <span flex="30">
+                                    {[ pay.author ]}
+                                </span>
+                            </span>
+                        </md-list-item>
+                    </md-list>
+                </div>
+            </div>
+        </div>
+    </div>
+</md-content>
